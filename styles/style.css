@@ -1,0 +1,53 @@
+:root {
+    box-sizing: border-box;
+    --bg: mediumseagreen;
+    --XL: 32px;
+    --L: 24px;
+    --M: 20px;
+    --S: 16px;
+}
+
+body {
+    background-color: var(--bg);
+}
+
+h1 {
+    font-size: var(--XL);
+}
+
+h2 {
+    font-size: var(--L);
+}
+
+h1, h2 {
+    font-family: head;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+    padding: 0 20px 0 20px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+nav a {
+    display: block;
+    padding: 10px;
+    color: black;
+    font-size: var(--M);
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: Helvetica;
+}
+
+p {
+    font-family: Helvetica;
+    font-size: var(--S);
+}
