@@ -19,7 +19,11 @@ h2 {
     font-size: var(--L);
 }
 
-h1, h2 {
+h3 {
+    font-size: var(--M);
+}
+
+h1, h2, h3 {
     font-family: head;
 }
 
