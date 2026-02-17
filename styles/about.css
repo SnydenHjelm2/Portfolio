@@ -1,5 +1,58 @@
+.bold {
+    font-weight: 600;
+}
+
+#contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px 0 20px;
+    margin-top: 50px;
+}
+
+#cv {
+    padding: 0 20px 0 20px;
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+}
+
+#cv > div {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+#cv h2 {
+    margin: 5px;
+}
+
+#cv #work, #cv #education {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 #img img {
     width: 100%;
+}
+
+.job, .education {
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid black;
+    box-shadow: 1px 1px 2px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.job h3, .education h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.job p, .education p {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 main {
@@ -10,4 +63,37 @@ main {
 main div {
     flex-grow: 1;
     flex-basis: 0;
+}
+
+main h1 {
+    margin: 0;
+}
+
+#media {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+#media a img {
+    height: 50px;
+}
+
+#media div {
+    display: flex;
+    justify-content: center;
+}
+
+#media div a {
+    text-align: center;
+    font-family: head;
+    color: black;
+    font-weight: 450;
+    font-size: var(--M);
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+#media div a:hover {
+    color: blue;
 }

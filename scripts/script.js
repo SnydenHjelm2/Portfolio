@@ -1,11 +1,25 @@
 const current = document.querySelector("#current");
+const education = [
+    {
+        name: "Web-based Design and Development - Bachelors Program",
+        location: "Malmö University - Malmö, Sweden",
+        time: "September 2024 - current",
+        note: "Full time, expected graduation summer 2027"
+    },
+    {
+        name: "The Electrical and Energy Programme, specialising in Computer and Communication Technology",
+        location: "NTI Gymnasiet Malmö - Malmö, Sweden",
+        time: "August 2018 - June 2021",
+        note: "Chose the Web-based in program path"
+    }
+];
 const featured = document.querySelectorAll(".home-project");
 const featuredProjects = [
     {
         title: "SnGeo - Geography Game", 
         desc: "Geography trivia game using an external geography api. Currently unfinished, but population and curreny games work!",
         languages: ["HTML", "CSS", "JS"],
-        link: "#"
+        link: "projects/sngeo/index.html"
     },
     {
         title: "2025-26 NFL Season",
@@ -14,12 +28,22 @@ const featuredProjects = [
         link: "#"
     },
     {
-        title: "Coming Soon...",
-        desc: "Be patient and make sure to check back later! :)",
-        languages: ["TBD", "TBD", "TBD"],
-        link: "#"
+        title: "JavaScript Roulette",
+        desc: "A simple but fun project where you can play roulette through JavaScript! Of course made with fake money.",
+        languages: ["HTML", "CSS", "JS"],
+        link: "projects/js-roulette/index.html"
     }
-]
+];
+const footer = document.querySelector("footer");
+const footerLinks = document.querySelectorAll("footer #right a");
+const jobs = [
+    {
+        employer: "PostNord Sverige",
+        location: "Package Terminal - Toftanäs, Malmö, Sweden",
+        time: "September 2021 - current",
+        note: "Still employed, on study leave since september 2024"
+    }
+];
 const navLinks = document.querySelectorAll("header nav a");
 
 navLinks.forEach((x) => {
@@ -78,7 +102,14 @@ function showFeaturedProjects() {
 }
 
 randomGreenishColor(current);
+randomGreenishColor(footer);
 featured.forEach((x) => {
     randomGreenishColor(x);
 });
 showFeaturedProjects();
+
+footerLinks.forEach((x) => {
+    if (x.textContent === current.textContent) {
+        x.style.textDecoration = "underline";
+    }
+});

@@ -9,6 +9,43 @@
 
 body {
     background-color: var(--bg);
+    margin: 0;
+}
+
+footer {
+    margin-top: 64px;
+    padding: 0 20px 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+footer #right {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+footer #right a {
+    flex-grow: 1;
+    flex-basis: 0;
+    text-decoration: none;
+    color: black;
+    font-size: var(--S);
+    font-family: Helvetica, sans-serif;
+}
+
+footer #right a:hover {
+    text-decoration: underline;
+}
+
+footer #right #footer-contact {
+    display: flex;
+    gap: 20px;
+}
+
+footer #right #links {
+    display: flex;
+    gap: 20px;
 }
 
 h1 {

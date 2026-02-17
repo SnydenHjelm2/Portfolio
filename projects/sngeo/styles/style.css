@@ -1,0 +1,91 @@
+@font-face {
+        font-family: head;
+        src: url(../fonts/Momo_Signature/MomoSignature-Regular.ttf);
+}
+
+@font-face {
+    font-family: bread;
+    src: url(../fonts/Rubik/Rubik-VariableFont_wght.ttf);
+}
+
+:root {
+    box-sizing: border-box;
+    --bg: #6ee676;
+}
+
+body {
+    background-color: var(--bg);
+    margin: 10px 25px 10px 25px;
+}
+
+#buttons {
+    display: flex;
+    gap: 15px;
+}
+
+#buttons button {
+    background-color: darkgreen;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 7px;
+    color: white;
+    font-size: 16px;
+    font-family: bread;
+}
+
+#buttons button:active {
+    transform: scale(0.95);
+}
+
+#buttons button:hover {
+    background-color: green;
+}
+
+.game {
+    display: none;
+    margin-top: 30px;
+    text-align: center;
+    font-family: bread;
+}
+
+.game button {
+    padding: 5px;
+}
+
+.game .country {
+    font-size: 22px;
+}
+
+.game h2 {
+    font-family: bread;
+}
+
+.game input {
+    width: 250px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.game p {
+    margin: 10px;
+}
+
+h1 {
+    font-family: head;
+    font-size: 40px;
+    margin: 5px;
+}
+
+h2 {
+    font-family: head;
+}
+
+nav {
+    margin-top: 50px;
+}
+
+p {
+    font-family: bread;
+    font-size: 20px;
+    margin: 5px;
+}
