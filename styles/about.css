@@ -1,0 +1,13 @@
+#img img {
+    width: 100%;
+}
+
+main {
+    display: flex;
+    gap: 20px;
+}
+
+main div {
+    flex-grow: 1;
+    flex-basis: 0;
+}

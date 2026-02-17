@@ -10,7 +10,7 @@ const featuredProjects = [
     {
         title: "2025-26 NFL Season",
         desc: "A website containing information about the 2025-26 NFL Season. Includes information about games, statistics, standings and the full 2025 NFL Draft.",
-        languages: ["HTML", "CSS", "JS", "PHP"],
+        languages: ["HTML", "CSS", "JS"],
         link: "#"
     },
     {
