@@ -102,7 +102,7 @@ function showFeaturedProjects() {
 }
 
 randomGreenishColor(current);
-randomGreenishColor(footer);
+//randomGreenishColor(footer);
 featured.forEach((x) => {
     randomGreenishColor(x);
 });

@@ -39,6 +39,7 @@ body {
 
 #buttons button:hover {
     background-color: green;
+    cursor: pointer;
 }
 
 .game {

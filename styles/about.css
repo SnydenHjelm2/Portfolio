@@ -70,30 +70,23 @@ main h1 {
 }
 
 #media {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 20px;
+    display: flex;
+    gap: 30px;
 }
 
 #media a img {
     height: 50px;
 }
 
-#media div {
+#media a {
     display: flex;
-    justify-content: center;
-}
-
-#media div a {
     text-align: center;
     font-family: head;
     color: black;
     font-weight: 450;
     font-size: var(--M);
-    flex-grow: 1;
-    flex-basis: 0;
 }
 
-#media div a:hover {
+#media a:hover {
     color: blue;
 }

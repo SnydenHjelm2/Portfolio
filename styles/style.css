@@ -17,6 +17,8 @@ footer {
     padding: 0 20px 0 20px;
     display: grid;
     grid-template-columns: 1fr 2fr;
+    background-color: seagreen;
+    border-top: 1px solid black;
 }
 
 footer #right {

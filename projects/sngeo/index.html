@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SnGeo | Fun Geography Games!</title>
+    <link rel="icon" href="images/se.png">
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
@@ -18,8 +19,24 @@
             <button id="area">Area</button>
             <button id="population">Population</button>
             <button id="capital">Capital</button>
+            <button id="gdp">GDP per Capita</button>
         </div>
     </nav>
+    <div class="game" id="capitals-game">
+        <h2>What is the Capital of this country?</h2>
+        <p class="country"></p>
+        <input type="text" placeholder="Enter Capital">
+        <button>Submit</button>
+        <p class="status">...</p>
+        <button class="restart">New Country</button>
+    </div>
+    <div class="game" id="gdp-game">
+        <h2></h2>
+        <input type="text" placeholder="Enter country">
+        <button>Submit</button>
+        <p class="status">...</p>
+        <button class="restart">New GDP</button>
+    </div>
     <div class="game" id="currency-game">
         <h2>What currency does this country use?</h2>
         <p class="country"></p>
@@ -35,7 +52,15 @@
         <p class="status">...</p>
         <button class="restart">New Area</button>
     </div>
+    <div class="game" id="population-game">
+        <h2></h2>
+        <input type="text" placeholder="Enter Country">
+        <button>Submit</button>
+        <p class="status">...</p>
+        <button class="restart">New Population</button>
+    </div>
     <script src="api/api.js"></script>
+    <script src="scripts/funcs.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 </html>

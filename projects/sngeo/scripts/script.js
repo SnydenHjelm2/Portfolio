@@ -1,24 +1,44 @@
-//Functions
-async function countryByName(country) {
-    if (country === "Democratic Republic of the Congo") {country = "Congo, The Democratic Republic Of The"}
-    else if (country === "South Korea") {country = "Korea, Republic Of"}
-    else if (country === "North Korea") {country = "Korea, Democratic People's Republic Of"}
-    else if (country === "Laos") {country = "Lao People's Democratic Republic"}
-    let req = new Request(`https://api.api-ninjas.com/v1/country?name=${country}`, {
-        method: "GET",
-        headers: {
-            "X-Api-Key": apiKey
-        }
-    });
-
-    let resp = await fetch(req);
-    let reso = await resp.json();
-    return reso;
+//Area obj
+const areas = {
+    0: {area1: 0, area2: 20000},
+    1: {area1: 20000, area2: 50000},
+    2: {area1: 50000, area2: 100000},
+    3: {area1: 100000, area2: 200000},
+    4: {area1: 200000, area2: 500000},
+    5: {area1: 500000, area2: 800000},
+    6: {area1: 800000, area2: 1200000},
+    7: {area1: 1200000, area2: 2000000},
+    8: {area1: 2000000}
 }
 
-//Area array
-const areas1 = [0, 50000, 200000, 600000, 2000000];
-const areas2 = [20000, 100000, 500000, 1000000];
+//GDP obj 
+const gdps = {
+    0: {gdp1: 0, gdp2: 1000},
+    1: {gdp1: 1000, gdp2: 5000},
+    2: {gdp1: 5000, gdp2: 10000},
+    3: {gdp1: 10000, gdp2: 20000},
+    4: {gdp1: 20000, gdp2: 30000},
+    5: {gdp1: 30000, gdp2: 40000},
+    6: {gdp1: 40000, gdp2: 50000},
+    7: {gdp1: 50000, gdp2: 70000},
+    8: {gdp1: 70000}
+}
+
+//Populations obj 
+const populations = {
+    0: {pop1: 0, pop2: 100000},
+    1: {pop1: 100000, pop2: 500000},
+    2: {pop1: 500000, pop2: 1000000},
+    3: {pop1: 1000000, pop2: 3000000},
+    4: {pop1: 3000000, pop2: 5000000},
+    5: {pop1: 5000000, pop2: 8000000},
+    6: {pop1: 8000000, pop2: 15000000},
+    7: {pop1: 15000000, pop2: 25000000},
+    8: {pop1: 25000000, pop2: 50000000},
+    9: {pop1: 50000000, pop2: 75000000},
+    10: {pop1: 75000000, pop2: 100000000},
+    11: {pop1: 100000000}
+}
 
 //Countries Array
 const countries = [
@@ -60,8 +80,8 @@ const countries = [
   { name: "China", flag: "🇨🇳" },
   { name: "Colombia", flag: "🇨🇴" },
   { name: "Comoros", flag: "🇰🇲" },
-  { name: "Republic of the Congo", flag: "🇨🇬" },
-  { name: "Democratic Republic of the Congo", flag: "🇨🇩" },
+  { name: "Republic of the Congo", flag: "🇨🇬", alias: "ROC"},
+  { name: "Democratic Republic of the Congo", flag: "🇨🇩", alias: "DRC"},
   { name: "Costa Rica", flag: "🇨🇷" },
   { name: "Croatia", flag: "🇭🇷" },
   { name: "Cuba", flag: "🇨🇺" },
@@ -227,6 +247,14 @@ const areaGameStart = document.querySelector("#area");
 const areaGameStatus = document.querySelector("#area-game .status");
 const areaGameSubmit = document.querySelector("#area-game button");
 const areaGameTitle = document.querySelector("#area-game h2");
+//Capital game 
+const capitalGame = document.querySelector("#capitals-game");
+const capitalGameCountry = document.querySelector("#capitals-game .country");
+const capitalGameInput = document.querySelector("#capitals-game input");
+const capitalGameRestart = document.querySelector("#capitals-game .restart");
+const capitalGameStart = document.querySelector("#capital");
+const capitalGameStatus = document.querySelector("#capitals-game .status");
+const capitalGameSubmit = document.querySelector("#capitals-game button");
 //Currency Game
 const currencyGame = document.querySelector("#currency-game");
 const currencyGameCountry = document.querySelector("#currency-game .country");
@@ -235,106 +263,173 @@ const currencyGameRestart = document.querySelector("#currency-game .restart");
 const currencyGameStart = document.querySelector("#currency");
 const currencyGameStatus = document.querySelector("#currency-game .status");
 const currencygameSubmit = document.querySelector("#currency-game button");
+//GDP game 
+const gdpGame = document.querySelector("#gdp-game");
+const gdpGameInput = document.querySelector("#gdp-game input");
+const gdpGameRestart = document.querySelector("#gdp-game .restart");
+const gdpGameStart = document.querySelector("#gdp");
+const gdpGameStatus = document.querySelector("#gdp-game .status");
+const gdpGameSubmit = document.querySelector("#gdp-game button");
+const gdpGameTitle = document.querySelector("#gdp-game h2");
 //Population Game
+const populationGame = document.querySelector("#population-game");
+const populationGameInput = document.querySelector("#population-game input");
+const populationGameRestart = document.querySelector("#population-game .restart");
 const populationGameStart = document.querySelector("#population");
+const populationGameStatus = document.querySelector("#population-game .status");
+const populationGameSubmit = document.querySelector("#population-game button");
+const populationGameTitle = document.querySelector("#population-game h2");
 //Other
 let area1;
 let area2;
+let gdp1;
+let gdp2;
+let pop1;
+let pop2;
 let randomCountry;
 
 //Eventlisteners
 areaGameRestart.addEventListener("click", () => {
-    currencyGame.style.display = "none";
-    //populationGame.style.display = "none";
-    areaGame.style.display = "block";
-    areaGameInput.value = "";
-    areaGameInput.placeholder = "Enter country";
-    areaGameTitle.textContent = "";
-    areaGameStatus.textContent = "...";
-    let rand = Math.floor(Math.random() * areas1.length);
-    area1 = areas1[rand];
-    area2 = areas2[rand];
-
-    if (area2 === undefined) {
-        areaGameTitle.textContent = `Name a country that has an area above ${area1}km²`;
-    } else {
-        areaGameTitle.textContent = `Name a country that has an area between ${area1}km² and ${area2}km²`;
-    }
+   startGame("area");
 });
 
 areaGameStart.addEventListener("click", () => {
-    currencyGame.style.display = "none";
-    //populationGame.style.display = "none";
-    areaGame.style.display = "block";
-    areaGameInput.value = "";
-    areaGameInput.placeholder = "Enter country";
-    areaGameTitle.textContent = "";
-    areaGameStatus.textContent = "...";
-    let rand = Math.floor(Math.random() * areas1.length);
-    area1 = areas1[rand];
-    area2 = areas2[rand];
-
-    if (area2 === undefined) {
-        areaGameTitle.textContent = `Name a country that has an area above ${area1}km²`;
-    } else {
-        areaGameTitle.textContent = `Name a country that has an area between ${area1}km² and ${area2}km²`;
-    }
+    startGame("area");
 });
 
 areaGameSubmit.addEventListener("click", async () => {
-    let country = countries.find((x) => x.name.toLowerCase() === areaGameInput.value.toLowerCase());
+    let country = countries.find((x) => x.name.toLowerCase() === areaGameInput.value.toLowerCase() || String(x.alias).toLowerCase() === areaGameInput.value.toLowerCase());
     if (!country) {
         areaGameStatus.textContent = "Invalid country, try again";
         return;
     } else {
         let countryArr = await countryByName(country.name);
-        console.log(countryArr);
+        if (countryArr[0].name === "Holy See (Vatican City State)") {
+            countryArr[0].surface_area = 1;
+        }
         if (area2 === undefined) {
             if (countryArr[0].surface_area > area1) {
-                areaGameStatus.textContent = `Correct! ${country.name} ${country.flag} has an area of ${countryArr[0].surface_area}km²`;
+                areaGameStatus.textContent = `Correct! ${country.name} ${country.flag} has an area of ${countryArr[0].surface_area.toLocaleString("se-SE")}km²`;
             } else {
-                areaGameStatus.textContent = `Incorrect! ${country.name} ${country.flag} has an area of ${countryArr[0].surface_area}km²`;
+                areaGameStatus.textContent = `Incorrect! ${country.name} ${country.flag} has an area of ${countryArr[0].surface_area.toLocaleString("se-SE")}km²`;
             }
         } else {
             if (countryArr[0].surface_area > area1 && countryArr[0].surface_area < area2) {
-                areaGameStatus.textContent = `Correct! ${country.name} ${country.flag} has an area of ${countryArr[0].surface_area}km²`;
+                areaGameStatus.textContent = `Correct! ${country.name} ${country.flag} has an area of ${countryArr[0].surface_area.toLocaleString("se-SE")}km²`;
             } else {
-                areaGameStatus.textContent = `Incorrect! ${country.name} ${country.flag} has an area of ${countryArr[0].surface_area}km²`;
+                areaGameStatus.textContent = `Incorrect! ${country.name} ${country.flag} has an area of ${countryArr[0].surface_area.toLocaleString("se-SE")}km²`;
             }
         }
     }
-})
+});
+
+capitalGameRestart.addEventListener("click", () => {
+    startGame("capital");
+});
+
+capitalGameStart.addEventListener("click", () => {
+    startGame("capital");
+});
+
+capitalGameSubmit.addEventListener("click", async () => {
+    let guess = capitalGameInput.value;
+    if (guess === "") {
+        capitalGameStatus.textContent = "Input is empty";
+        return;
+    } else {
+        let countryArr = await countryByName(randomCountry.name);
+        if (countryArr[0].capital.toLowerCase() === guess.toLowerCase()) {
+            capitalGameStatus.textContent = `Correct! The capital of ${randomCountry.name} is ${countryArr[0].capital}`;
+        } else {
+            capitalGameStatus.textContent = `Incorrect! The capital of ${randomCountry.name} is ${countryArr[0].capital}`;
+        }
+    }
+});
 
 currencyGameRestart.addEventListener("click", () => {
-    areaGame.style.display = "none";
-    //populationGame.style.display = "none";
-    currencyGameStatus.textContent = "...";
-    currencyGameInput.value = "";
-    currencyGameInput.placeholder = "Enter Currency";
-    currencyGame.style.display = "block";
-    let rand = Math.floor(Math.random() * countries.length);
-    randomCountry = countries[rand];
-    currencyGameCountry.textContent = `${randomCountry.name} ${randomCountry.flag}`;
+    startGame("currency");
 });
 
 currencyGameStart.addEventListener("click", () => {
-    areaGame.style.display = "none";
-    //populationGame.style.display = "none";
-    currencyGameStatus.textContent = "...";
-    currencyGameInput.value = "";
-    currencyGameInput.placeholder = "Enter Currency";
-    currencyGame.style.display = "block";
-    let rand = Math.floor(Math.random() * countries.length);
-    randomCountry = countries[rand];
-    currencyGameCountry.textContent = `${randomCountry.name} ${randomCountry.flag}`;
+    startGame("currency");
 }); 
 
 currencygameSubmit.addEventListener("click", async () => {
     let guess = currencyGameInput.value;
+    if (guess === "") {
+        currencyGameStatus.textContent = "Input is empty";
+        return;
+    }
     let countryArr = await countryByName(randomCountry.name);
     if (countryArr[0].currency.name.toLowerCase() === guess.toLowerCase() || countryArr[0].currency.code.toLowerCase() === guess.toLowerCase()) {
         currencyGameStatus.textContent = `Correct! ${randomCountry.name} uses the ${countryArr[0].currency.name} (${countryArr[0].currency.code})`;
     } else {
         currencyGameStatus.textContent = `Incorrect! ${randomCountry.name} uses the ${countryArr[0].currency.name} (${countryArr[0].currency.code})`;
+    }
+});
+
+gdpGameRestart.addEventListener("click", () => {
+    startGame("gdp");
+});
+
+gdpGameStart.addEventListener("click", () => {
+    startGame("gdp");
+});
+
+gdpGameSubmit.addEventListener("click", async () => {
+    let guess = gdpGameInput.value;
+    let country = countries.find((x) => x.name.toLowerCase() === guess.toLowerCase() || String(x.alias).toLowerCase() === guess.toLowerCase());
+    if (!country) {
+        gdpGameStatus.textContent = "Invalid country";
+    } else {
+        let countryArr = await countryByName(country.name);
+        let gdpPerCapita = countryArr[0].gdp_per_capita;
+        if (gdp2 === undefined) {
+            if (gdpPerCapita > gdp1) {
+                gdpGameStatus.textContent = `Correct! ${country.name} ${country.flag} has a GDP per capita of $${gdpPerCapita.toLocaleString("se-SE")} (USD)`;
+            } else {
+                gdpGameStatus.textContent = `Incorrect! ${country.name} ${country.flag} has a GDP per capita of $${gdpPerCapita.toLocaleString("se-SE")} (USD)`;
+            }
+        } else {
+            if (gdpPerCapita > gdp1 && gdpPerCapita < gdp2) {
+                gdpGameStatus.textContent = `Correct! ${country.name} ${country.flag} has a GDP per capita of $${gdpPerCapita.toLocaleString("se-SE")} (USD)`;
+            } else {
+                gdpGameStatus.textContent = `Incorrect! ${country.name} ${country.flag} has a GDP per capita of $${gdpPerCapita.toLocaleString("se-SE")} (USD)`;
+            }
+        }
+    }
+});
+
+populationGameRestart.addEventListener("click", () => {
+    startGame("population");
+});
+
+populationGameStart.addEventListener("click", () => {
+    startGame("population");
+});
+
+populationGameSubmit.addEventListener("click", async () => {
+    let country = countries.find((x) => x.name.toLowerCase() === populationGameInput.value.toLowerCase() || String(x.alias).toLowerCase() === populationGameInput.value.toLowerCase());
+    if (!country) {
+        populationGameStatus.textContent = "Invalid country";
+        return;
+    } else {
+        let countryArr = await countryByName(country.name);
+        let realPop = countryArr[0].population * 1000;
+        console.log(countryArr, realPop);
+
+        if (pop2 === undefined) {
+            if (realPop > pop1) {
+                populationGameStatus.textContent = `Correct! ${country.name} ${country.flag} has a population of ${realPop.toLocaleString("se-SE")}`;
+            } else {
+                populationGameStatus.textContent = `Incorrect! ${country.name} ${country.flag} has a population of ${realPop.toLocaleString("se-SE")}`;
+            }
+        } else {
+            if (realPop > pop1 && realPop < pop2) {
+                populationGameStatus.textContent = `Correct! ${country.name} ${country.flag} has a population of ${realPop.toLocaleString("se-SE")}`;
+            } else {
+                populationGameStatus.textContent = `Incorrect! ${country.name} ${country.flag} has a population of ${realPop.toLocaleString("se-SE")}`;
+            }
+        }
     }
 });
