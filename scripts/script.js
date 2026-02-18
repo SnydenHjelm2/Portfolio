@@ -1,3 +1,49 @@
+const allProjects = [
+    {
+        title: "SnGeo - Geography Game", 
+        desc: "Geography trivia game using an external geography api. Currently unfinished, but population and curreny games work!",
+        languages: ["HTML", "CSS", "JS"],
+        link: "../projects/sngeo/index.html",
+        featured: true,
+        featuredLink: "projects/sngeo/index.html"
+    },
+    {
+        title: "2025-26 NFL Season",
+        desc: "A website containing information about the 2025-26 NFL Season. Includes information about games, statistics, standings and the full 2025 NFL Draft.",
+        languages: ["HTML", "CSS", "JS"],
+        link: "#",
+        featured: true
+    },
+    {
+        title: "JavaScript Roulette",
+        desc: "A simple but fun project where you can play roulette through JavaScript! Of course made with fake money.",
+        languages: ["HTML", "CSS", "JS"],
+        link: "../projects/js-roulette/index.html",
+        featured: true,
+        featuredLink: "projects/js-roulette/index.html"
+    },
+    {
+        title: "DDU3-U2: uni project",
+        desc: "A project i made for university. A website where you can view cities, add cities and search for cities. Made to be an assingment for server / request handling.",
+        languages: ["HTML", "CSS", "JS"],
+        link: "#",
+        featured: false
+    },
+    {
+        title: "DDU2-U1: uni project (in swedish)",
+        desc: "Another project I did for university. In this one a giant table of distances between cities exists. You can also see which city is closest and furthest away by entrying city into promt.",
+        languages: ["HTML", "CSS", "JS"],
+        link: "../projects/ddu2-u1/index.html",
+        featured: false
+    },
+    {
+        title: "Coming soon...",
+        desc: "Sit tight! More projects coming soon. Be sure to check back later! :)",
+        languages: [],
+        link: "#",
+        featured: false
+    }
+]
 const current = document.querySelector("#current");
 const education = [
     {
@@ -14,26 +60,6 @@ const education = [
     }
 ];
 const featured = document.querySelectorAll(".home-project");
-const featuredProjects = [
-    {
-        title: "SnGeo - Geography Game", 
-        desc: "Geography trivia game using an external geography api. Currently unfinished, but population and curreny games work!",
-        languages: ["HTML", "CSS", "JS"],
-        link: "projects/sngeo/index.html"
-    },
-    {
-        title: "2025-26 NFL Season",
-        desc: "A website containing information about the 2025-26 NFL Season. Includes information about games, statistics, standings and the full 2025 NFL Draft.",
-        languages: ["HTML", "CSS", "JS"],
-        link: "#"
-    },
-    {
-        title: "JavaScript Roulette",
-        desc: "A simple but fun project where you can play roulette through JavaScript! Of course made with fake money.",
-        languages: ["HTML", "CSS", "JS"],
-        link: "projects/js-roulette/index.html"
-    }
-];
 const footer = document.querySelector("footer");
 const footerLinks = document.querySelectorAll("footer #right a");
 const jobs = [
@@ -73,6 +99,7 @@ function randomGreenishColor(element, color = null) {
 };
 
 function showFeaturedProjects() {
+    let featuredProjects = allProjects.filter((x) => x.featured);
     for (i=0; i<featured.length; i++) {
         featured[i].innerHTML = `
         <h3>${featuredProjects[i].title}</h3>
@@ -87,7 +114,7 @@ function showFeaturedProjects() {
             if (j === featuredProjects[i].languages.length) {
                 let div = document.createElement("div");
                 div.classList.add("project-link");
-                div.innerHTML = `<a href="${featuredProjects[i].link}">Visit Project →</a>`;
+                div.innerHTML = `<a href="${featuredProjects[i].featuredLink}">Visit Project →</a>`;
                 projectLangDiv[i].appendChild(div);
                 break;
             }

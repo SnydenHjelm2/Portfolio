@@ -1,0 +1,72 @@
+.css {
+    background-color: #2965f1;
+}
+
+.js {
+    background-color: #f0db4f;
+}
+
+.html {
+    background-color: #e34c26;
+}
+
+.languages {
+    font-family: head;
+    display: flex;
+    text-align: center;
+    gap: 5px;
+}
+
+.language {
+    flex-grow: 1;
+    flex-basis: 0;
+    border-radius: 5px;
+}
+
+.php {
+    background-color: #8993be;
+}
+
+.project {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    box-shadow: 1px 1px 2px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.project a {
+    color: black;
+    text-decoration: none;
+    font-family: Helvetica, sans-serif;
+    background-color: limegreen;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.project a:hover {
+    background-color: #1DB954;
+}
+
+.project h3 {
+    margin: 0 5px 0 5px;
+}
+
+.project p {
+    margin: 10px 5px 10px 5px;
+}
+
+#projects {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.tbd {
+    background-color: gray;
+}
